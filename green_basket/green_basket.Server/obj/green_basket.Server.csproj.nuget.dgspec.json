@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {}
+    "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {}
   },
   "projects": {
-    "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {
+    "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
+        "projectUniqueName": "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
         "projectName": "green_basket.Server",
-        "projectPath": "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
-        "packagesPath": "C:\\Users\\Desk\\.nuget\\packages\\",
-        "outputPath": "D:\\Green_Basket\\green_basket\\green_basket.Server\\obj\\",
+        "projectPath": "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
+        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
+        "outputPath": "E:\\Green_Basket\\green_basket\\green_basket.Server\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Desk\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
