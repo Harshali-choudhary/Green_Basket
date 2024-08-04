@@ -1,0 +1,6 @@
+@green_basket.Server_HostAddress = http://localhost:5139
+
+GET {{green_basket.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
