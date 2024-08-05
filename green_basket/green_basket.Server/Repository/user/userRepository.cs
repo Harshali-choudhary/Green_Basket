@@ -3,6 +3,7 @@ using green_basket.Server.Repository.user.Interface;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace green_basket.Server.Repository.user
 {
@@ -39,21 +40,23 @@ namespace green_basket.Server.Repository.user
                     string mobile_no = reader["mobile_no"].ToString();
                     string role = reader["role"].ToString(); ;
 
-                    User user = new User(
-                        this.user_Id = user_Id;
-                    this.first_name = first_name;
-                    this.last_name = last_name;
-                    this.email = email;
-                    this.password = password;
-                    this.address = address;
-                    this.mobile_no = mobile_no;
-                    this.role = role;
+                    User user = new User()
+                    {
+                        user_Id = user_Id,
+                        first_name = first_name,
+                        last_name = last_name,
+                        email = email,
+                        password = password,
+                        address = address,
+                        mobile_no = mobile_no,
+                        role = role,
+                    }
                 }
                 users.Add(user);
             }
             await reader.CloseAsync();
         }
-        Catch(Exception )
+        Catch(Exception e)
         {
             throw;
         }
