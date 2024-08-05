@@ -8,7 +8,7 @@ namespace green_basket.Server.Entities
         [Key]
         public int bill_id;
         [ForeignKey("user_Id")]
-        public int user_id;
+        public int user_Id;
         [ForeignKey("order_id")]
         public int order_Id;
         [Required]
@@ -26,7 +26,7 @@ namespace green_basket.Server.Entities
         public BillDetails(int bill_id, int user_id, int order_Id, DateTime transactonDate, TransactionMode transactionMode, TransactionStatus status)
         {
             this.bill_id = bill_id;
-            this.user_id = user_id;
+            this.user_Id = user_id;
             this.order_Id = order_Id;
             this.transactonDate = transactonDate;
             this.transactionMode = transactionMode;

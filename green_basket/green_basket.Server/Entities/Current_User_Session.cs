@@ -7,7 +7,7 @@ namespace green_basket.Server.Entities
     {
         [Key]
         public  int Id { get; set; }
-        [ForeignKey("user_id")]
+        [ForeignKey("user_Id")]
         public int user_Id { get; set; }
 
         [Required]

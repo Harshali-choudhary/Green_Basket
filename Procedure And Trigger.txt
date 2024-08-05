@@ -1,0 +1,15 @@
+Procedure
+
+delimiter//
+create procedure sp_register(In first_name varchar(20),In last_name varchar(20),In address varchar(255),In role enum('Admin','Customer'),In password varchar(20),In email varchar(50),In mobile_no varchar(13))
+begin
+insert into user(first_name,last_name,address,role,password,email,mobile_no) values(first_name,last_name,address,role,password,email,mobile_no);
+end//
+delimiter;
+
+delimiter//
+create procedure sp_login(In uemail varchar(50),In upassword varchar(20))
+begin
+select * from user where email=uemail and password=upassword;
+end//
+delimiter;
