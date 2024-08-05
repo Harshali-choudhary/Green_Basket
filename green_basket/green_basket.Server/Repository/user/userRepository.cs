@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 
 namespace green_basket.Server.Repository.user
 {
-    public class userRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
 
-        public userRepository(IConfiguration configuration)
+        public UserRepository(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = this._configuration.GetConnectionString("DefaultConnection");
@@ -27,43 +27,51 @@ namespace green_basket.Server.Repository.user
                 string query = "select * from user";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 await connection.OpenAsync();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (await reader.ReadAsync())
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
-                    int user_Id = int.Parse(reader["user_Id"].ToString());
-                    string first_name = reader["first_name"].ToString();
-                    string last_name = reader["last_name"].ToString();
-                    string email = reader["email"].ToString();
-                    string password = reader["password"].ToString();
-                    string address = reader["address"].ToString();
-                    string mobile_no = reader["mobile_no"].ToString();
-                    string role = reader["role"].ToString(); ;
-
-                    User user = new User()
+                    while (await reader.ReadAsync())
                     {
-                        this.user_Id = user_Id;
-                        this.first_name = first_name;
-                        this.last_name = last_name;
-                        this.email = email;
-                        this.password = password;
-                        this.address = address;
-                        this.mobile_no = mobile_no;
-                        this.role = role;
-                    };
-                    users.Add(user);
+                        int UserId = int.Parse(reader["user_Id"].ToString());
+                        string? FirstName = reader["first_name"].ToString();
+                        string? LastName = reader["last_name"].ToString();
+                        string? Email = reader["email"].ToString();
+                        string? Password = reader["password"].ToString();
+                        string? Address = reader["address"].ToString();
+                        string? MobileNo = reader["mobile_no"].ToString();
+                        string? roleString = reader["role"].ToString();
+
+                        Role roles;
+                        if(!Enum.TryParse(roleString,out roles))
+                        {
+                            roles = Role.Customer;
+                        }
+
+                        User user = new User()
+                        {
+                            user_Id = UserId,
+                            first_name = FirstName,
+                            last_name = LastName,
+                            email = Email,
+                            password = Password,
+                            address = Address,
+                            mobile_no = MobileNo,
+                            role = roles,
+                        };
+                        users.Add(user);
+                    }
                 }
-                await reader.CloseAsync();
             }
-             Catch(Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
-             finally
-             {
+            finally
+            {
                 await connection.CloseAsync();
-             }
+            }
             return users;
         }
+
 
         public async Task<bool> Insert(User user)
         {
@@ -72,27 +80,27 @@ namespace green_basket.Server.Repository.user
             connection.ConnectionString = _connectionString;
             try
             {
-                string query = "insert into(first_name,last_name,address,role,password,email,mobile_no)" +
-                    " user values(@first_name,@last_name,@address,@role,@password,@email,@mobile_no)";
+                string query = "insert into user (first_name,last_name,address,role,password,email,mobile_no)" +
+                    "  values(@first_name,@last_name,@address,@role,@password,@email,@mobile_no)";
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@first_name", first_name);
-                command.Parameters.AddWithValue("@last_name", last_name);
-                command.Parameters.AddWithValue("@address", address);
-                command.Parameters.AddWithValue("@role", role);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@mobile_no", mobile_no);
+                command.Parameters.AddWithValue("@first_name", user.first_name);
+                command.Parameters.AddWithValue("@last_name", user.last_name);
+                command.Parameters.AddWithValue("@address", user.address);
+                command.Parameters.AddWithValue("@role", user.role.ToString());
+                command.Parameters.AddWithValue("@password", user.password);
+                command.Parameters.AddWithValue("@email", user.email);
+                command.Parameters.AddWithValue("@mobile_no", user.mobile_no);
 
-                connection.Open();
-                int rowsaffected = command.ExecuteNonQuery();
+                await connection.OpenAsync();
+                int rowsaffected = await command.ExecuteNonQueryAsync();
                 if(rowsaffected > 0)
                 {
                     status = true;
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw;
+                throw new Exception("An error occured while inserting the user.", ex);
             }
             finally
             {
@@ -112,13 +120,13 @@ namespace green_basket.Server.Repository.user
                     "address = @address,role = @role, mobile_no = @mobile_no where" +
                     " email = @email and password = @password";
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@first_name", first_name);
-                command.Parameters.AddWithValue("@last_name", last_name);
-                command.Parameters.AddWithValue("@address", address);
-                command.Parameters.AddWithValue("@role", role);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@mobile_no", mobile_no);
-                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@first_name", user.first_name);
+                command.Parameters.AddWithValue("@last_name", user.last_name);
+                command.Parameters.AddWithValue("@address", user.address);
+                command.Parameters.AddWithValue("@role", user.role.ToString());
+                command.Parameters.AddWithValue("@password", user.password);
+                command.Parameters.AddWithValue("@mobile_no", user.mobile_no);
+                command.Parameters.AddWithValue("@email", user.email);
 
                 int affectedRows = command.ExecuteNonQuery();
                 if(affectedRows > 0)
