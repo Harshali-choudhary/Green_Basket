@@ -1,4 +1,5 @@
 ﻿using green_basket.Server.Entities;
+using green_basket.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
@@ -16,14 +17,26 @@ namespace green_basket.Server.Controllers
             _configuration = configuration;
         }
 
-        [HttpPost]
-        [Route("registration")]
-        public Response Register(User user)
-        {
-            Response response = new Response();
+        //[HttpPost]
+        //[Route("registration")]
+        //public Response Register(User user)
+        //{
+        //    Response response = new Response();
+        //    UserDAL userDAL = new UserDAL();
+        //    SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("green_basket").ToString());
+        //    response=userDAL.register(user, connection);
+        //    return response;
+        //}
 
-            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString().ToString);
-            return response;
-        }
+        //[HttpPost]
+        //[Route("login")]
+        //public Response Login(User user)
+        //{
+        //    Response response = new Response();
+        //    UserDAL userDAL = new UserDAL();
+        //    SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("").ToString());
+        //    response=userDAL.Login(user, connection);
+        //    return response;
+        //}
     }
 }

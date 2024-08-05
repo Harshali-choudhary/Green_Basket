@@ -1,0 +1,8 @@
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.csproj.AssemblyReference.cache
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\spa.proxy.json
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.GeneratedMSBuildEditorConfig.editorconfig
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.AssemblyInfoInputs.cache
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.AssemblyInfo.cs
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.csproj.CoreCompileInputs.cache
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.MvcApplicationPartsAssemblyInfo.cache
+D:\Green_Basket\green_basket\green_basket.Server\obj\Release\net8.0\green_basket.Server.sourcelink.json
