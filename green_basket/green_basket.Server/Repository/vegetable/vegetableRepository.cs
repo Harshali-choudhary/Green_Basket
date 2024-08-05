@@ -31,26 +31,127 @@ namespace green_basket.Server.Repository.vegetable
                     int vegetable_id = int.Parse(reader["vegetable_id"].ToString());
                     string image_url = reader["image_url"].ToString();
                     string name = reader["name"].ToString();
-                    decimal price = decimal.Parse(reader["price"].ToString();
-                    int quanitity = int.Parse(reader["quantity"].ToString());
+                    decimal price = decimal.Parse(reader["price"].ToString());
+                    int quantity = int.Parse(reader["quantity"].ToString());
 
-                    vegetables vegetable = new vegetables(
-                        this.vegetable_id = vegetable_id;
-                    this.image_url = image_url;
-                    this.name = name;
-                    this.price = price;
-                    this.quantity = quantity;
+                    Vegetables vegetable = new Vegetables()
+                    {
+                        vegetable_id = vegetable_id,
+                        image_url = image_url,
+                        vegetable_name = name,
+                        vegetable_price = price,
+                        quantity = quantity
+                    };
+                    vegetables.Add(vegetable);
                 }
-                Vegetables.add(vegetable);
+                await reader.CloseAsync();
             }
-            await reader.CloseAsync();
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+            return vegetables;
         }
-catch (Exception){
-            throw
-         }
-finally{
-    await connection.CloseAsync();
-    }
-return Vegetables;
+
+        public async Task<bool> Delete(int id)
+        {
+            bool status=false;
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString=_connectionString;
+            try
+            {
+                string query = "delete from vegetables where id=@vegetable_id";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("vegetable_id", id);
+                await connection.OpenAsync();
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    status = true;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally 
+            {
+                await connection.CloseAsync(); 
+            }
+            return status;
+        }
+
+        public async Task<bool> Insert(Vegetables vegetable)
+        {
+            bool status = false; ;
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _connectionString;
+            try
+            {
+                string query = "Insert into vegetables (image_url,vegetable_name,vegetable_price,quantity) values(@image_url,@name,@price,@quantity)";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@image_url", vegetable.image_url);
+                command.Parameters.AddWithValue("@name", vegetable.vegetable_name);
+                command.Parameters.AddWithValue("@price", vegetable.vegetable_price);
+                command.Parameters.AddWithValue("@quantity", vegetable.quantity);
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    status = true;
+                }
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                await connection.CloseAsync() ;
+            }
+            return status;
+        }
+
+        public async Task<bool> Update(Vegetables vegetable)
+        {
+           bool status= false; 
+           MySqlConnection connection = new MySqlConnection();
+           connection.ConnectionString = _connectionString;
+            try
+            {
+                string query = "update customers set image_url=@image_url,name=@name,price=@price,quantity=@price where id=@vegetable_id";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@vegetable_id", vegetable.vegetable_id);
+                command.Parameters.AddWithValue("@vegetable_name", vegetable.vegetable_name);
+                command.Parameters.AddWithValue("@vegetable_price", vegetable.vegetable_price);
+                command.Parameters.AddWithValue("@quantity", vegetable.quantity);
+                await connection.OpenAsync();
+                int rowsAffected = command.ExecuteNonQuery();
+                {
+                    if (rowsAffected > 0)
+                    {
+                        status = true;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+            return status;
+        }
+
+
     }
 }
+   
