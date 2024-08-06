@@ -1,5 +1,7 @@
+using green_basket.Server.Repository.order;
 using green_basket.Server.Repository.user;
 using green_basket.Server.Repository.user.Interface;
+using green_basket.Server.Service.orderService;
 using green_basket.Server.Service.userService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,6 +24,8 @@ builder.Services.AddSwaggerGen();
 // Register the UserRepository and UserService
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService,UserService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 
 // Configure CORS policy (optional)
 builder.Services.AddCors(options =>

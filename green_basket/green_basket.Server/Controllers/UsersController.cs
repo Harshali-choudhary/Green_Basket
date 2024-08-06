@@ -65,5 +65,11 @@ namespace green_basket.Server.Controllers
             bool status = await _userService.UpdateDetails(user);
             return status;
         }
+        [HttpDelete("Delete")]
+        public async Task<bool> Delete([FromBody]string email)
+        {
+            bool status = await _userService.Delete(email);
+            return status;
+        }
     }
 }
