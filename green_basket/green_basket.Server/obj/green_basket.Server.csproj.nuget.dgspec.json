@@ -46,25 +46,33 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.7, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
             "Microsoft.AspNetCore.SpaProxy": {
               "target": "Package",
               "version": "[8.*-*, )"
-            },
-            "MySql.Data": {
-              "target": "Package",
-              "version": "[9.0.0, )"
             },
             "MySql.Data.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.14, )"
             },
-            "Swashbuckle.AspNetCore.Swagger": {
+            "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.0.7, )"
+              "version": "[6.4.0, )"
             },
-            "System.Data.SqlClient": {
+            "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
-              "version": "[4.8.6, )"
+              "version": "[6.7.0, )"
+            },
+            "mysql.data": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             }
           },
           "imports": [

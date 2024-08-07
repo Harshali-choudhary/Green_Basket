@@ -1,5 +1,5 @@
 ﻿using green_basket.Server.Entities;
-using green_basket.Server.Models;
+using green_basket.Server.Service.userService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
@@ -10,12 +10,12 @@ namespace green_basket.Server.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
 
-        public UsersController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        //public UsersController(IConfiguration configuration)
+        //{
+        //    _configuration = configuration;
+        //}
 
         //[HttpPost]
         //[Route("registration")]
@@ -38,5 +38,32 @@ namespace green_basket.Server.Controllers
         //    response=userDAL.Login(user, connection);
         //    return response;
         //}
+
+        private readonly IUserService _userService;
+
+        public UsersController(IUserService userService)
+        {
+            _userService = userService;
+        }
+        [HttpGet("Getall")]
+        public async Task<List<User>> Getall()
+        {
+            List<User> userList = await _userService.Getall();
+            return userList;
+        }
+
+        [HttpPost("Insert")]
+        public async Task<bool> Insert([FromBody]User user)
+        {
+            bool status = await _userService.Insert(user);
+            return status;
+        }
+
+        [HttpPut("UpdateDetails")]
+        public async Task<bool> UpdateDetails([FromBody]User user)
+        {
+            bool status = await _userService.UpdateDetails(user);
+            return status;
+        }
     }
 }

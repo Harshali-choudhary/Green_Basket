@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b49046fc66fe15d9b1cf5b27af01b44ede17e23")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+461c70f83b0020e2cad74c2a807b747b66cccd8b")]
 [assembly: System.Reflection.AssemblyProductAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

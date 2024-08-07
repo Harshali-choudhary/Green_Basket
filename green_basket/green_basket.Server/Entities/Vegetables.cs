@@ -4,9 +4,9 @@ namespace green_basket.Server.Entities
 {
     public class Vegetables
     {
-        [Required(ErrorMessage ="Vegetable ID is required")]
-        [Range(1,int.MaxValue,ErrorMessage ="Vegetable ID must be a positive integer.")]
-        public int vegetable_id {  get; set; }
+        [Key]
+        public int vegetable_id { get; set; }
+
         [Url(ErrorMessage ="Invalid URl format.")]
         public string image_url { get; set; }
         [Required(ErrorMessage ="Vegetable name is required.")]
