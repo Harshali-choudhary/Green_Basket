@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "iEvGy2DxdA6FzLw2/Ptabmtq2oHbTczfNQV9OIHUZLk=",
+  "Source": "green_basket.Server",
+  "BasePath": "_content/green_basket.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\Green_Basket\\green_basket\\green_basket.client\\green_basket.client.esproj",
+      "Version": 2,
+      "Source": "green_basket.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

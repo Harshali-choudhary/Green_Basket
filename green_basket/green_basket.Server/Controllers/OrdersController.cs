@@ -6,7 +6,7 @@ namespace green_basket.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : Controller
+    public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;
         public OrdersController(IOrderService orderService)
@@ -22,21 +22,21 @@ namespace green_basket.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> InsertOrder(Orders order)
+        public async Task<bool> InsertOrder([FromBody]Orders order)
         {
             bool status = await _orderService.InsertOrder(order);
             return status;
         }
 
         [HttpPut]
-        public async Task<bool> UpdateOrder(Orders o)
+        public async Task<bool> UpdateOrder([FromBody]Orders o)
         {
             bool status = await _orderService.UpdateOrder(o);
             return status;
         }
 
         [HttpDelete]
-        public  async Task<bool> DeleteOrder(int order_id)
+        public  async Task<bool> DeleteOrder([FromBody]int order_id)
         {
             bool status = await _orderService.DeleteOrder(order_id);
             return status;

@@ -156,7 +156,7 @@ namespace green_basket.Server.Repository.order
             }
             catch(Exception exec)
             {
-                throw new Exception("Error occured while updating the order");
+                throw new Exception("Error occured while updating the order",exec);
             }
             finally
             {

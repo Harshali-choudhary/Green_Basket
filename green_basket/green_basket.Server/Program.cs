@@ -1,6 +1,10 @@
+using green_basket.Server.Repository.bill_details;
+using green_basket.Server.Repository.current_user_session;
 using green_basket.Server.Repository.order;
 using green_basket.Server.Repository.user;
 using green_basket.Server.Repository.user.Interface;
+using green_basket.Server.Service.BillService;
+using green_basket.Server.Service.CurrentUserSessionService;
 using green_basket.Server.Service.orderService;
 using green_basket.Server.Service.userService;
 using Microsoft.AspNetCore.Builder;
@@ -26,6 +30,10 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+builder.Services.AddScoped<IBillDetailsRepository,bill_detailsRepository>();
+builder.Services.AddScoped<IBillDetailsService, BillDetailsService>();
+builder.Services.AddScoped<ICurrentUserSessionRepo, CurrentUserSessionRepo>();
+builder.Services.AddScoped<ICurrentUserSession, CurrentUserSessionService>();
 
 // Configure CORS policy (optional)
 builder.Services.AddCors(options =>
