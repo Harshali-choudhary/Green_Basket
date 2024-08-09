@@ -159,5 +159,33 @@ namespace green_basket.Server.Repository.user
             }
             return status;
         }
+
+        public async Task<bool> Delete(string email)
+        {
+            bool status = false;
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _connectionString;
+            try
+            {
+                string query = "delete from user where email=@email";
+                MySqlCommand command = new MySqlCommand(query,connection);
+                command.Parameters.AddWithValue("@email", email);
+                await connection.OpenAsync();
+                int rowsAffected= command.ExecuteNonQuery();
+                if(rowsAffected > 0)
+                {
+                    status = true;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception("Error while deleteing the user.", e);
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+            return status;
+        }
     }
 }

@@ -15,5 +15,7 @@ namespace green_basket.Server.Service.userService
         public async Task<bool> Insert(User user) => await _userRepository.Insert(user);
 
         public async Task<bool> UpdateDetails(User user) => await _userRepository.UpdateDetails(user);
+
+        public async Task<bool> Delete(string email) => await _userRepository.Delete(email);
     }
 }

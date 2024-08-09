@@ -1,13 +1,21 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "uz9+38J3VDYZhT+pzik0QUiDHjAXNh6SoiCED1Es0Kk=",
+=======
+  "Hash": "iEvGy2DxdA6FzLw2/Ptabmtq2oHbTczfNQV9OIHUZLk=",
+>>>>>>> 7cfc4f2e9b34642b1c66e5e62ce16ae4ed9480fe
   "Source": "green_basket.Server",
   "BasePath": "_content/green_basket.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
+<<<<<<< HEAD
       "Identity": "E:\\Green_Basket\\green_basket\\green_basket.client\\green_basket.client.esproj",
+=======
+      "Identity": "D:\\Green_Basket\\green_basket\\green_basket.client\\green_basket.client.esproj",
+>>>>>>> 7cfc4f2e9b34642b1c66e5e62ce16ae4ed9480fe
       "Version": 2,
       "Source": "green_basket.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

@@ -3,7 +3,11 @@
 "ServerUrl": "https://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
+<<<<<<< HEAD
 "WorkingDirectory": "E:\\Green_Basket\\green_basket\\green_basket.Server\\..\\green_basket.client",
+=======
+"WorkingDirectory": "D:\\Green_Basket\\green_basket\\green_basket.Server\\..\\green_basket.client",
+>>>>>>> 7cfc4f2e9b34642b1c66e5e62ce16ae4ed9480fe
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

@@ -1,10 +1,15 @@
-﻿namespace green_basket.Server.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace green_basket.Server.Entities
 {
     public enum TransactionMode
     {
-        Cash_on_delivery,
+        [Display(Name = "Cash on delivery")]
+        CashOnDelivery,
         UPI,
-        Credit_Card,
-        Debit_Card
+        [Display(Name = "Credit Card")]
+        CreditCard,
+        [Display(Name = "Debit Card")]
+        DebitCard
     }
 }
