@@ -1,11 +1,19 @@
 //using green_basket.Server.Repository.order;
+using green_basket.Server.Repository.Cart;
+using green_basket.Server.Repository.Cart.Interface;
 using green_basket.Server.Repository.Cart_Vegetable;
 using green_basket.Server.Repository.Cart_Vegetable.Interface;
+using green_basket.Server.Repository.Feedback;
+using green_basket.Server.Repository.Feedback.Interface;
 using green_basket.Server.Repository.user;
 using green_basket.Server.Repository.user.Interface;
 using green_basket.Server.Repository.vegetable;
 using green_basket.Server.Repository.vegetable.Interface;
+using green_basket.Server.Service.Cart_orderService;
 using green_basket.Server.Service.CartVegetableService;
+using green_basket.Server.Service.Feedback;
+
+
 
 
 //using green_basket.Server.Service.orderService;
@@ -38,6 +46,10 @@ builder.Services.AddScoped<ICartVegetablesRepository, CartVegetableRepository>()
 builder.Services.AddScoped<ICartVegetableService,CartVegetableService>();
 //builder.Services.AddScoped<IOrderService, OrderService>();
 //builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<ICartOrderRepository, CartOrderRepository>();
+builder.Services.AddScoped<ICartOrderService, CartOrderService>();
 
 // Configure CORS policy (optional)
 builder.Services.AddCors(options =>
