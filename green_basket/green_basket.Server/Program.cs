@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+//using green_basket.Server.Repository.order;
+using green_basket.Server.Repository.Cart;
+using green_basket.Server.Repository.Cart.Interface;
+using green_basket.Server.Repository.Cart_Vegetable;
+using green_basket.Server.Repository.Cart_Vegetable.Interface;
+using green_basket.Server.Repository.Feedback;
+using green_basket.Server.Repository.Feedback.Interface;
+using green_basket.Server.Repository.user;
+using green_basket.Server.Repository.user.Interface;
+using green_basket.Server.Repository.vegetable;
+using green_basket.Server.Repository.vegetable.Interface;
+using green_basket.Server.Service.Cart_orderService;
+using green_basket.Server.Service.CartVegetableService;
+using green_basket.Server.Service.Feedback;
+
+
+
+
+//using green_basket.Server.Service.orderService;
+=======
 using green_basket.Server.Repository.bill_details;
 using green_basket.Server.Repository.current_user_session;
 using green_basket.Server.Repository.order;
@@ -6,7 +27,9 @@ using green_basket.Server.Repository.user.Interface;
 using green_basket.Server.Service.BillService;
 using green_basket.Server.Service.CurrentUserSessionService;
 using green_basket.Server.Service.orderService;
+>>>>>>> 7cfc4f2e9b34642b1c66e5e62ce16ae4ed9480fe
 using green_basket.Server.Service.userService;
+using green_basket.Server.Service.VegetableService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -21,12 +44,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-}); 
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Register the UserRepository and UserService
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+<<<<<<< HEAD
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IVegetableRepository, VegetableRepository>();
+builder.Services.AddScoped<IVegetableService, VegetableService>();
+builder.Services.AddScoped<ICartVegetablesRepository, CartVegetableRepository>();
+builder.Services.AddScoped<ICartVegetableService,CartVegetableService>();
+//builder.Services.AddScoped<IOrderService, OrderService>();
+//builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<ICartOrderRepository, CartOrderRepository>();
+builder.Services.AddScoped<ICartOrderService, CartOrderService>();
+=======
 builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository,OrderRepository>();
@@ -34,6 +70,7 @@ builder.Services.AddScoped<IBillDetailsRepository,bill_detailsRepository>();
 builder.Services.AddScoped<IBillDetailsService, BillDetailsService>();
 builder.Services.AddScoped<ICurrentUserSessionRepo, CurrentUserSessionRepo>();
 builder.Services.AddScoped<ICurrentUserSession, CurrentUserSessionService>();
+>>>>>>> 7cfc4f2e9b34642b1c66e5e62ce16ae4ed9480fe
 
 // Configure CORS policy (optional)
 builder.Services.AddCors(options =>

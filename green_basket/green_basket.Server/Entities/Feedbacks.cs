@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace green_basket.Server.Entities
 {
-    public class Feedback
+    public class Feedbacks
     {
-        public int feedback_id { get; set; }
+        public int fid { get; set; }
         [ForeignKey("vegetable_id")]
         public int vegetable_id { get; set; }
         [ForeignKey("user_Id")]
@@ -15,13 +15,13 @@ namespace green_basket.Server.Entities
         [StringLength(100,ErrorMessage ="Comments can't be longer than 100 characters")]
         public string comments { get; set; }
         
-        public Feedback()
+        public Feedbacks()
         {
 
         }
-        public Feedback(int feedback_id, int vegetable_id, int user_id, int rating, string comments)
+        public Feedbacks(int feedback_id, int vegetable_id, int user_id, int rating, string comments)
         {
-            this.feedback_id = feedback_id;
+            this.fid = feedback_id;
             this.vegetable_id = vegetable_id;
             this.user_Id = user_id;
             this.rating = rating;

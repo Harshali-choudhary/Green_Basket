@@ -3,6 +3,7 @@ using green_basket.Server.Repository.user.Interface;
 using Microsoft.VisualBasic;
 using MySql.Data.MySqlClient;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace green_basket.Server.Repository.user
 {
@@ -29,7 +30,19 @@ namespace green_basket.Server.Repository.user
                 await connection.OpenAsync();
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
+                    int user_Id = int.Parse(reader["user_Id"].ToString());
+                    string? first_name = reader["first_name"].ToString();
+                    string? last_name = reader["last_name"].ToString();
+                    string? email = reader["email"].ToString();
+                    string? password = reader["password"].ToString();
+                    string? address = reader["address"].ToString();
+                    string? mobile_no = reader["mobile_no"].ToString();
+                    string? role = reader["role"].ToString(); ;
+
+                    User user = new User();
+
                     while (await reader.ReadAsync())
+
                     {
                         int UserId = int.Parse(reader["user_Id"].ToString());
                         string? FirstName = reader["first_name"].ToString();
@@ -46,7 +59,7 @@ namespace green_basket.Server.Repository.user
                             roles = Role.Customer;
                         }
 
-                        User user = new User()
+                        User currentuser = new User()
                         {
                             user_Id = UserId,
                             first_name = FirstName,
@@ -57,7 +70,7 @@ namespace green_basket.Server.Repository.user
                             mobile_no = MobileNo,
                             role = roles,
                         };
-                        users.Add(user);
+                        users.Add(currentuser);
                     }
                 }
             }
@@ -74,6 +87,7 @@ namespace green_basket.Server.Repository.user
 
 
         public async Task<bool> Insert(User user)
+
         {
             bool status = false;
             MySqlConnection connection = new MySqlConnection();

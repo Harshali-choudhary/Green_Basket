@@ -25,8 +25,8 @@
         public List<Current_User_Session> userSessionList { get; set; }
         public Current_User_Session current_userSession { get; set; }
 
-        public  List<Feedback> feedbacklist { get; set; }
-        public  Feedback feedback { get; set; }
+        public  List<Feedbacks> feedbacklist { get; set; }
+        public  Feedbacks feedback { get; set; }
 
 
 
