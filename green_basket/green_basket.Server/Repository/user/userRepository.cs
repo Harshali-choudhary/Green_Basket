@@ -21,69 +21,62 @@ namespace green_basket.Server.Repository.user
         public async Task<List<User>> Getall()
         {
             List<User> users = new List<User>();
-            MySqlConnection connection = new MySqlConnection();
-            connection.ConnectionString = _connectionString;
+            MySqlConnection connection = new MySqlConnection(_connectionString);
+
             try
             {
-                string query = "select * from user";
+                string query = "SELECT * FROM user";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 await connection.OpenAsync();
+
                 using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
                 {
-                    int user_Id = int.Parse(reader["user_Id"].ToString());
-                    string? first_name = reader["first_name"].ToString();
-                    string? last_name = reader["last_name"].ToString();
-                    string? email = reader["email"].ToString();
-                    string? password = reader["password"].ToString();
-                    string? address = reader["address"].ToString();
-                    string? mobile_no = reader["mobile_no"].ToString();
-                    string? role = reader["role"].ToString(); ;
-
-                    User user = new User();
-
                     while (await reader.ReadAsync())
-
                     {
-                        int UserId = int.Parse(reader["user_Id"].ToString());
-                        string? FirstName = reader["first_name"].ToString();
-                        string? LastName = reader["last_name"].ToString();
-                        string? Email = reader["email"].ToString();
-                        string? Password = reader["password"].ToString();
-                        string? Address = reader["address"].ToString();
-                        string? MobileNo = reader["mobile_no"].ToString();
+                        int userId = int.Parse(reader["user_Id"].ToString());
+                        string? firstName = reader["first_name"].ToString();
+                        string? lastName = reader["last_name"].ToString();
+                        string? email = reader["email"].ToString();
+                        string? password = reader["password"].ToString();
+                        string? address = reader["address"].ToString();
+                        string? mobileNo = reader["mobile_no"].ToString();
                         string? roleString = reader["role"].ToString();
 
-                        Role roles;
-                        if(!Enum.TryParse(roleString,out roles))
+                        Role role;
+                        if (!Enum.TryParse(roleString, out role))
                         {
-                            roles = Role.Customer;
+                            role = Role.Customer; // Default to Customer if parsing fails
                         }
 
-                        User currentuser = new User()
+                        User currentUser = new User()
                         {
-                            user_Id = UserId,
-                            first_name = FirstName,
-                            last_name = LastName,
-                            email = Email,
-                            password = Password,
-                            address = Address,
-                            mobile_no = MobileNo,
-                            role = roles,
+                            user_Id = userId,
+                            first_name = firstName,
+                            last_name = lastName,
+                            email = email,
+                            password = password,
+                            address = address,
+                            mobile_no = mobileNo,
+                            role = role,
                         };
-                        users.Add(currentuser);
+
+                        users.Add(currentUser);
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                // You can log the exception here if needed
+                throw;
             }
             finally
             {
                 await connection.CloseAsync();
             }
+
             return users;
         }
+
 
 
         public async Task<bool> Insert(User user)
@@ -187,5 +180,53 @@ namespace green_basket.Server.Repository.user
             }
             return status;
         }
+
+        public async Task<User> Login(string email, string password)
+        {
+            User? user = null;
+            MySqlConnection connection = new MySqlConnection(_connectionString);
+
+            try
+            {
+                // SQL query to select the user where the email and password match
+                string query = "SELECT * FROM user WHERE email = @email AND password = @password";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@password", password);
+
+                await connection.OpenAsync();
+
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    // If a match is found, populate the user object
+                    if (await reader.ReadAsync())
+                    {
+                        user = new User
+                        {
+                            user_Id = int.Parse(reader["user_Id"].ToString()),
+                            first_name = reader["first_name"].ToString(),
+                            last_name = reader["last_name"].ToString(),
+                            email = reader["email"].ToString(),
+                            password = reader["password"].ToString(),
+                            address = reader["address"].ToString(),
+                            mobile_no = reader["mobile_no"].ToString(),
+                            role = Enum.TryParse(reader["role"].ToString(), out Role role) ? role : Role.Customer,
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while logging in.", ex);
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+
+            return user;
+        }
+
     }
+
 }

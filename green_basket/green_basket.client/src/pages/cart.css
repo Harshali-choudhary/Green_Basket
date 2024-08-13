@@ -1,0 +1,18 @@
+/* cart.css */
+
+.cart {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+    .cart h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #4CAF50; /* Green color */
+    }
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -71,5 +71,13 @@ namespace green_basket.Server.Controllers
             bool status = await _userService.Delete(email);
             return status;
         }
+        
+        [HttpPost("Login")]
+        public async Task<User> Login([FromForm] string email, [FromForm] string password)
+        {
+            User u = await _userService.Login(email, password);
+            return u;
+        }
+
     }
 }

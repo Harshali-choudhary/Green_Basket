@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("30f06d93-1b95-43d6-a090-ff3db1025d6d")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b32910867285f221cb176cdc51d8e1b3026cc248")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14da90cb8977f634c670f7e10d995615bd825dad")]
 [assembly: System.Reflection.AssemblyProductAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

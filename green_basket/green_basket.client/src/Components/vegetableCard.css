@@ -1,0 +1,54 @@
+.vegetable-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vegetable-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.vegetable-name {
+    margin-top: 8px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.vegetable-description {
+    margin-top: 4px;
+    font-size: 1rem;
+    color: #666;
+}
+.vegetable-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.vegetable-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.vegetable-name {
+    margin-top: 8px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.vegetable-description {
+    margin-top: 4px;
+    font-size: 1rem;
+    color: #666;
+}
