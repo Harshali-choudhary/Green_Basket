@@ -1,4 +1,4 @@
-
+// .eslintrc.cjs
 module.exports = {
     root: true,
     env: { browser: true, es2020: true },
@@ -10,7 +10,11 @@ module.exports = {
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-    settings: { react: { version: '18.3' } }, 
+    settings: {
+        react: {
+            version: 'detect' // Automatically detect the React version
+        }
+    },
     plugins: ['react-refresh'],
     rules: {
         'react/jsx-no-target-blank': 'off',

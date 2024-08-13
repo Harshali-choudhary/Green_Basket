@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // SearchBar.jsx
 import React, { useState } from 'react';
 import './searchBar.css';

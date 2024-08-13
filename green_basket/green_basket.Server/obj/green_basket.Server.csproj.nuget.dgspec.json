@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {}
+    "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {}
   },
   "projects": {
-    "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {
+    "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
+        "projectUniqueName": "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
         "projectName": "green_basket.Server",
-        "projectPath": "E:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
+        "projectPath": "D:\\Green_Basket\\green_basket\\green_basket.Server\\green_basket.Server.csproj",
         "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "E:\\Green_Basket\\green_basket\\green_basket.Server\\obj\\",
+        "outputPath": "D:\\Green_Basket\\green_basket\\green_basket.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
