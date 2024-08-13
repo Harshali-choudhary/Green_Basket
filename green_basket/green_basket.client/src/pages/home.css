@@ -1,0 +1,20 @@
+/* home.css */
+
+.home {
+    text-align: center;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+    .home h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #4CAF50; /* Green color */
+    }
+
+    .home p {
+        font-size: 1.2rem;
+        margin-top: 0;
+        color: #666;
+    }

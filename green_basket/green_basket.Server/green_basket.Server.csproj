@@ -7,6 +7,7 @@
     <SpaRoot>..\green_basket.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
+    <UserSecretsId>30f06d93-1b95-43d6-a090-ff3db1025d6d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

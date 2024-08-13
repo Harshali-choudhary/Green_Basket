@@ -1,0 +1,18 @@
+/* shop.css */
+
+.shop {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+    .shop h1 {
+        text-align: center;
+        font-size: 2rem;
+        color: #4CAF50; /* Green color */
+    }
+
+.vegetable-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
