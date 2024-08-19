@@ -2,7 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'fs';
 import path from 'path';
+import { execSync } from 'child_process';
+import process from 'process';
+
 import { env } from 'process';
+
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 const baseFolder = env.APPDATA || `${env.HOME}/.aspnet/https`;
 const certificateName = "green_basket.client";
@@ -12,7 +17,7 @@ const keyFilePath = path.join(baseFolder, `${certificateName}.key`);
 // Generate certificate if it doesn't exist
 if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
     try {
-        require('child_process').execSync(
+        execSync(
             `dotnet dev-certs https --export-path ${certFilePath} --format Pem --no-password`,
             { stdio: 'inherit' }
         );

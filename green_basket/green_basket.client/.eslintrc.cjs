@@ -1,3 +1,6 @@
+
+// .eslintrc.cjs
+
 module.exports = {
     root: true,
     env: { browser: true, es2020: true },
@@ -11,8 +14,12 @@ module.exports = {
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
     settings: {
         react: {
+ HEAD
             version: '18.0', // or 'detect'
         },
+            version: 'detect' // Automatically detect the React version
+        }
+
     },
     plugins: ['react-refresh'],
     rules: {

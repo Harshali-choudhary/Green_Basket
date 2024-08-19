@@ -15,7 +15,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+93ed7650da45e04990456d645333677a2755343a")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+011fce63293d40ee96a10b74e732b7d77f8b4cb8")]
+>>>>>>> 0a42ce88a1476370a72a2416c022a3102abda372
 [assembly: System.Reflection.AssemblyProductAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("green_basket.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
