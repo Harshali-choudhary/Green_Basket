@@ -152,6 +152,42 @@ namespace green_basket.Server.Repository.vegetable
             return status;
         }
 
+        public async Task<Vegetables> GetById(int id)
+        {
+            Vegetables vegetable = null;
+            MySqlConnection connection = new MySqlConnection();
+            connection.ConnectionString = _connectionString;
+            try
+            {
+                string query = "select * from Vegetables where vegetable_id=@id";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                await connection.OpenAsync();
+                command.Parameters.AddWithValue("@vegetable_id", id);
+                MySqlDataReader reader = command.ExecuteReader();
+                while (await reader.ReadAsync())
+                {
+                    vegetable = new Vegetables
+                    {
+                        vegetable_id = reader.GetInt32("vegetable_id"),
+                        image_url = reader.GetString("image_url"),
+                        vegetable_name = reader.GetString("vegetable_name"),
+                        vegetable_price = reader.GetDecimal("vegetable_price"),
+                        quantity = reader.GetInt32("quantity")
+                    };
+                   
+                }
+                await reader.CloseAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+            return vegetable;
+        }
 
     }
 }

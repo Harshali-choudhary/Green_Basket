@@ -1,4 +1,3 @@
-
 module.exports = {
     root: true,
     env: { browser: true, es2020: true },
@@ -10,7 +9,11 @@ module.exports = {
     ],
     ignorePatterns: ['dist', '.eslintrc.cjs'],
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-    settings: { react: { version: '18.3' } }, 
+    settings: {
+        react: {
+            version: '18.0', // or 'detect'
+        },
+    },
     plugins: ['react-refresh'],
     rules: {
         'react/jsx-no-target-blank': 'off',

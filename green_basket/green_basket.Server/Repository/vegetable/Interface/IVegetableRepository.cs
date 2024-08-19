@@ -8,5 +8,6 @@ namespace green_basket.Server.Repository.vegetable.Interface
         Task<bool> Delete(int id);
         Task<bool> Insert(Vegetables vegetable);
         Task<bool> Update(Vegetables vegetable);
+        Task<Vegetables> GetById(int id);
     }
 }

@@ -1,0 +1,73 @@
+.vegetable-update-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+    .vegetable-update-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .vegetable-update-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .vegetable-update-form div {
+        margin-bottom: 15px;
+    }
+
+    .vegetable-update-form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #555;
+    }
+
+    .vegetable-update-form input[type="text"],
+    .vegetable-update-form input[type="number"],
+    .vegetable-update-form input[type="url"],
+    .vegetable-update-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .vegetable-update-form textarea {
+        resize: vertical;
+        height: 100px;
+    }
+
+    .vegetable-update-form button {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .vegetable-update-form button:hover {
+            background-color: #218838;
+        }
+
+    .vegetable-update-form .error {
+        color: #dc3545;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .vegetable-update-form .success {
+        color: #28a745;
+        font-size: 14px;
+        text-align: center;
+    }

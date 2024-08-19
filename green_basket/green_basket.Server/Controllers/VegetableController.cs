@@ -1,12 +1,13 @@
 ﻿using green_basket.Server.Entities;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using green_basket.Server.Service.VegetableService;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace green_basket.Server.Controllers
 {
     [ApiController]
-    [Route("/api/vegetable")]
+    [Route("api/[controller]")]
     public class VegetableController : ControllerBase
     {
         private readonly IVegetableService _service;
@@ -15,30 +16,115 @@ namespace green_basket.Server.Controllers
         {
             _service = service;
         }
-        
-        [HttpGet]
-        public async Task<List<Vegetables>> GetAll()
+
+        [HttpGet("/GetAllVegetable")]
+        public async Task<IActionResult> GetAll()
         {
-            List<Vegetables> vegetables= await _service.GetAll();
-            return vegetables;
+            try
+            {
+                List<Vegetables> vegetables = await _service.GetAll();
+                return Ok(new { Success = true, Data = vegetables });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
-        [HttpPost]
-        public async Task<bool> Insert([FromBody] Vegetables vegetables)
+
+        [HttpGet("/id")]
+        public async Task<IActionResult> GetById([FromBody] int id)
         {
-            bool result= await _service.Insert(vegetables);
-            return result;
+            try
+            {
+                Vegetables vegetables = await _service.GetById(id);
+                return Ok(new { Success = true, Data = vegetables });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
-        [HttpPut]
-        public async Task<bool> Update(Vegetables vegetables)
+        [HttpPost("/InsertVegetable")]
+        public async Task<IActionResult> Insert([FromBody] Vegetables vegetables)
         {
-            bool result= await _service.Update(vegetables);
-            return result;
+            if (vegetables == null)
+            {
+                return BadRequest(new { Success = false, Message = "Invalid vegetable data." });
+            }
+
+            try
+            {
+                bool result = await _service.Insert(vegetables);
+                if (result)
+                {
+                    return CreatedAtAction(nameof(GetAll), new { id = vegetables.vegetable_id }, new { Success = true });
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, Message = "Failed to insert vegetable." });
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
-        [HttpDelete]
-        public async Task<bool> Delete(int id)
-        { 
-            bool result = await _service.Delete(id);
-            return result;
+
+        [HttpPut("/Update")]
+        public async Task<IActionResult> Update([FromBody] Vegetables vegetables)
+        {
+            if (vegetables == null)
+            {
+                return BadRequest(new { Success = false, Message = "Invalid vegetable data." });
+            }
+
+            try
+            {
+                bool result = await _service.Update(vegetables);
+                if (result)
+                {
+                    return NoContent(); 
+                }
+                else
+                {
+                    return NotFound(new { Success = false, Message = "Vegetable not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
+        }
+
+        [HttpDelete("/Delete")]
+        public async Task<IActionResult> Delete([FromQuery] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest(new { Success = false, Message = "Invalid vegetable ID." });
+            }
+
+            try
+            {
+                bool result = await _service.Delete(id);
+                if (result)
+                {
+                    return NoContent(); 
+                }
+                else
+                {
+                    return NotFound(new { Success = false, Message = "Vegetable not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
     }
 }

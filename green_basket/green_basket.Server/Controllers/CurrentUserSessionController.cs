@@ -1,14 +1,18 @@
 ﻿using green_basket.Server.Entities;
 using green_basket.Server.Service.CurrentUserSessionService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace green_basket.Server.Controllers
 {
     [ApiController]
-    [Route("/[controller]")]
-    public class CurrentUserSessionController : Controller
+    [Route("api/[controller]")]
+    [Authorize] 
+    public class CurrentUserSessionController : ControllerBase
     {
-       private readonly ICurrentUserSession _currentUserSession;
+        private readonly ICurrentUserSession _currentUserSession;
 
         public CurrentUserSessionController(ICurrentUserSession currentUserSession)
         {
@@ -16,31 +20,94 @@ namespace green_basket.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Current_User_Session>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            List<Current_User_Session> Clist = await _currentUserSession.getAll();
-            return Clist;
+            try
+            {
+                var sessions = await _currentUserSession.getAll();
+                return Ok(new { Success = true, Data = sessions });
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
 
         [HttpPost]
-        public async Task<bool> Insert(Current_User_Session user_Session)
+        public async Task<IActionResult> Insert([FromBody] Current_User_Session user_Session)
         {
-            bool status = await _currentUserSession.Insert(user_Session);
-            return status;
+            if (user_Session == null)
+            {
+                return BadRequest(new { Success = false, Message = "Invalid session data." });
+            }
+
+            try
+            {
+                bool status = await _currentUserSession.Insert(user_Session);
+                if (status)
+                {
+                    return CreatedAtAction(nameof(GetAll), new { id = user_Session.Id }, new { Success = true, Data = user_Session });
+                }
+                else
+                {
+                    return BadRequest(new { Success = false, Message = "Failed to insert session." });
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
 
         [HttpPut]
-        public async Task<bool> Update(Current_User_Session current_User_Session)
+        public async Task<IActionResult> Update([FromBody] Current_User_Session current_User_Session)
         {
-            bool status = await _currentUserSession.Update(current_User_Session);
-            return status;
+            if (current_User_Session == null)
+            {
+                return BadRequest(new { Success = false, Message = "Invalid session data." });
+            }
+
+            try
+            {
+                bool status = await _currentUserSession.Update(current_User_Session);
+                if (status)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound(new { Success = false, Message = "Session not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
 
-        [HttpDelete]
-        public async Task<bool> Delete(int Cid)
+        [HttpDelete("{Cid}")]
+        public async Task<IActionResult> Delete(int Cid)
         {
-            bool status = await _currentUserSession.Delete(Cid);
-            return status;
+            try
+            {
+                bool status = await _currentUserSession.Delete(Cid);
+                if (status)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return NotFound(new { Success = false, Message = "Session not found." });
+                }
+            }
+            catch (Exception ex)
+            {
+               
+                return StatusCode(500, new { Success = false, Message = "Internal server error" });
+            }
         }
     }
 }

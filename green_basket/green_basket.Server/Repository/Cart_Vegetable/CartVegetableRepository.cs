@@ -140,5 +140,36 @@ namespace green_basket.Server.Repository.Cart_Vegetable
 
         }
 
+        public async Task<Cart_Vegetables> GetById(int id)
+        {
+            Cart_Vegetables vegetable = null;
+            using MySqlConnection connection = new MySqlConnection(_connectionString);
+            try
+            {
+                string query = "SELECT * FROM cart_vegetable WHERE vcart_id = @id";
+                using MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@id", id);
+                await connection.OpenAsync();
+                using (MySqlDataReader reader =(MySqlDataReader) await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        int vegeId = int.Parse(reader["vegetable_id"].ToString());
+
+                        vegetable = new Cart_Vegetables()
+                        {
+                            vcart_id = id,
+                            vegetable_id = vegeId,
+                        };
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return vegetable;
+        }
     }
 }

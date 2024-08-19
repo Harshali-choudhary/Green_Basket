@@ -1,0 +1,48 @@
+.vegetable-add-form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+    .vegetable-add-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .vegetable-add-form form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .vegetable-add-form div {
+        margin-bottom: 15px;
+    }
+
+    .vegetable-add-form label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #555;
+    }
+
+    .vegetable-add-form input[type="text"],
+    .vegetable-add-form input[type="number"],
+    .vegetable-add-form input[type="url"],
+    .vegetable-add-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .vegetable-add-form textarea {
+        resize: vertical;
+        height: 100px;
+    }
+
+    .vegetable-add-form button {

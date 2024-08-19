@@ -1,4 +1,13 @@
-
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Text.Json.Serialization;
 using green_basket.Server.Repository.bill_details;
 using green_basket.Server.Repository.Cart;
 using green_basket.Server.Repository.Cart.Interface;
@@ -18,90 +27,96 @@ using green_basket.Server.Service.CartVegetableService;
 using green_basket.Server.Service.CurrentUserSessionService;
 using green_basket.Server.Service.Feedback;
 using green_basket.Server.Service.orderService;
-
-
-
-
-
-using green_basket.Server.Repository.bill_details;
-using green_basket.Server.Repository.current_user_session;
-using green_basket.Server.Repository.order;
-using green_basket.Server.Repository.user;
-using green_basket.Server.Repository.user.Interface;
-using green_basket.Server.Service.BillService;
-using green_basket.Server.Service.CurrentUserSessionService;
-using green_basket.Server.Service.orderService;
 using green_basket.Server.Service.userService;
 using green_basket.Server.Service.VegetableService;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
 
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllers().AddJsonOptions(options =>
+internal class Program
 {
-    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-});
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Register the UserRepository and UserService
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IVegetableRepository, VegetableRepository>();
-builder.Services.AddScoped<IVegetableService, VegetableService>();
-builder.Services.AddScoped<ICartVegetablesRepository, CartVegetableRepository>();
-builder.Services.AddScoped<ICartVegetableService,CartVegetableService>();
-builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-builder.Services.AddScoped<IFeedbackService, FeedbackService>();
-builder.Services.AddScoped<ICartOrderRepository, CartOrderRepository>();
-builder.Services.AddScoped<ICartOrderService, CartOrderService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IOrderRepository,OrderRepository>();
-builder.Services.AddScoped<IBillDetailsRepository,bill_detailsRepository>();
-builder.Services.AddScoped<IBillDetailsService, BillDetailsService>();
-builder.Services.AddScoped<ICurrentUserSessionRepo, CurrentUserSessionRepo>();
-builder.Services.AddScoped<ICurrentUserSession, CurrentUserSessionService>();
-
-
-// Configure CORS policy (optional)
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll",
-        builder =>
+        // Add services to the container.
+        builder.Services.AddControllers().AddJsonOptions(options =>
         {
-            builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
-});
 
-var app = builder.Build();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-app.UseDefaultFiles();
-app.UseStaticFiles();
+        // Register repositories and services
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IUserService, UserService>();
+        builder.Services.AddScoped<IVegetableRepository, VegetableRepository>();
+        builder.Services.AddScoped<IVegetableService, VegetableService>();
+        builder.Services.AddScoped<ICartVegetablesRepository, CartVegetableRepository>();
+        builder.Services.AddScoped<ICartVegetableService, CartVegetableService>();
+        builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+        builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+        builder.Services.AddScoped<ICartOrderRepository, CartOrderRepository>();
+        builder.Services.AddScoped<ICartOrderService, CartOrderService>();
+        builder.Services.AddScoped<IOrderService, OrderService>();
+        builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+        builder.Services.AddScoped<IBillDetailsRepository, bill_detailsRepository>();
+        builder.Services.AddScoped<IBillDetailsService, BillDetailsService>();
+        builder.Services.AddScoped<ICurrentUserSessionRepo, CurrentUserSessionRepo>();
+        builder.Services.AddScoped<ICurrentUserSession, CurrentUserSessionService>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+        // Configure JWT Authentication
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+            options.SaveToken = true;
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                ValidAudience = builder.Configuration["Jwt:Audience"]
+            };
+        });
+
+        // Configure CORS policy
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+        });
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        // Serve static files from the directory where your React app is built
+        app.UseDefaultFiles();
+        app.UseStaticFiles();  
+
+        app.UseHttpsRedirection();
+        app.UseCors("AllowAll"); 
+        app.UseAuthentication(); 
+        app.UseAuthorization();  
+
+        app.MapControllers();
+        app.MapFallbackToFile("/index.html"); 
+
+        app.Run();
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseCors("AllowAll"); // Apply CORS policy
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.MapFallbackToFile("/index.html");
-
-app.Run();

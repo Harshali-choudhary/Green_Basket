@@ -1,4 +1,3 @@
-
 {
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
@@ -14,31 +13,28 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "http://localhost:5139", // Change to a valid route if needed
-      "applicationUrl": "http://localhost:5139",
+      "launchUrl": "https://localhost:5139", 
+      "applicationUrl": "https://localhost:5139", 
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "https://localhost:7287", // Change to a valid route if needed
-      "applicationUrl": "https://localhost:7287;http://localhost:5139",
+      "launchUrl": "https://localhost:7287", 
+      "applicationUrl": "https://localhost:7287;http://localhost:5139", 
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "http://localhost:44649", // Change to a valid route if needed
+      "launchUrl": "http://localhost:44649", 
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }

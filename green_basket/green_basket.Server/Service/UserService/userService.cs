@@ -18,5 +18,6 @@ namespace green_basket.Server.Service.userService
 
         public async Task<bool> Delete(string email) => await _userRepository.Delete(email);
         public async Task<User> Login(string email,string password) => await _userRepository.Login(email, password);
+        public async Task<User> GetByEmail(string email) => await _userRepository.GetByEmail(email);
     }
 }

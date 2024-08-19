@@ -188,7 +188,7 @@ namespace green_basket.Server.Repository.user
 
             try
             {
-                // SQL query to select the user where the email and password match
+                
                 string query = "SELECT * FROM user WHERE email = @email AND password = @password";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("@email", email);
@@ -227,6 +227,48 @@ namespace green_basket.Server.Repository.user
             return user;
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            User? user = null;
+            MySqlConnection connection = new MySqlConnection(_connectionString);
+
+            try
+            {
+                string query = "SELECT * FROM user WHERE email = @email";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@email", email);
+
+                await connection.OpenAsync();
+
+                using (MySqlDataReader reader = (MySqlDataReader)await command.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        user = new User
+                        {
+                            user_Id = int.Parse(reader["user_Id"].ToString()),
+                            first_name = reader["first_name"].ToString(),
+                            last_name = reader["last_name"].ToString(),
+                            email = reader["email"].ToString(),
+                            password = reader["password"].ToString(),
+                            address = reader["address"].ToString(),
+                            mobile_no = reader["mobile_no"].ToString(),
+                            role = Enum.TryParse(reader["role"].ToString(), out Role role) ? role : Role.Customer,
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetching the user by email.", ex);
+            }
+            finally
+            {
+                await connection.CloseAsync();
+            }
+
+            return user;
+        }
     }
 
 }

@@ -9,7 +9,7 @@ namespace green_basket.Server.Repository.user.Interface
         Task<bool> UpdateDetails(User user);
         Task<bool> Delete(string email);
         Task<User> Login(string email, string password);
-
+        Task<User> GetByEmail(string email);
 
     }
 }

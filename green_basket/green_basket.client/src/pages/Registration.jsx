@@ -17,6 +17,11 @@ const Registration = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        if (!email || !password || !firstName || !lastName || !address || !mobileNo) {
+            setError('Please fill out all fields.');
+            return;
+        }
+
         try {
             const response = await axios.post('https://localhost:7287/api/Users/Insert', {
                 first_name: firstName,
@@ -28,13 +33,23 @@ const Registration = () => {
                 role: role
             });
 
-            if (response.data) {
+            if (response.data && response.data.Success) {
+                setSuccess('Registration successful!');
+                // Optionally clear form fields
+                setFirstName('');
+                setLastName('');
+                setEmail('');
+                setPassword('');
+                setAddress('');
+                setMobileNo('');
+                // Navigate to login page
                 navigate('/login');
             } else {
-                setError('Registration failed. Please try again.');
+                setError(response.data.Message || 'Registration failed. Please try again.');
             }
         } catch (error) {
             setError('An error occurred. Please try again later.');
+            console.error('Registration error:', error);
         }
     };
 

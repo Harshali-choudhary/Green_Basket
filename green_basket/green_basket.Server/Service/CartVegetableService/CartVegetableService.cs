@@ -14,5 +14,7 @@ namespace green_basket.Server.Service.CartVegetableService
         public async Task<bool> Insert(Cart_Vegetables vegetables)=>await _repo.Insert(vegetables);
         public async Task<bool> Update(Cart_Vegetables vegetables)=>await _repo.Update(vegetables);
         public async Task<bool> Delete(int id)=>await _repo.Delete(id);
+
+       public async Task<Cart_Vegetables> GetById(int id) => await _repo.GetById(id);
     }
 }
