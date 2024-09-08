@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './deleteVegetableform.css'; // Ensure you create this CSS file for styling
+import './deleteVegetableform.css'; 
 
 const DeleteVegetableForm = () => {
     const [vegetableId, setVegetableId] = useState('');
@@ -13,7 +13,7 @@ const DeleteVegetableForm = () => {
         setSuccess('');
 
         try {
-            const response = await axios.delete(`https://localhost:7287/api/Vegetables/Delete/${vegetableId}`);
+            const response = await axios.delete(`https://localhost:7001/api/Vegetables/Delete/${vegetableId}`);
 
             if (response.data.Success) {
                 setSuccess('Vegetable deleted successfully!');

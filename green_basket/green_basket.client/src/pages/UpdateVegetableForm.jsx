@@ -15,7 +15,7 @@ const UpdateVegetableForm = ({ vegetableId, onUpdateSuccess }) => {
     useEffect(() => {
         const fetchVegetable = async () => {
             try {
-                const response = await axios.get(`https://localhost:7287/api/Vegetables/${vegetableId}`);
+                const response = await axios.get(`https://localhost:7001/api/Vegetables/${vegetableId}`);
                 setVegetable(response.data);
             } catch (error) {
                 console.error('Error fetching vegetable:', error);

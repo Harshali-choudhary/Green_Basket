@@ -9,7 +9,7 @@ const Shop = () => {
     useEffect(() => {
         const fetchVegetables = async () => {
             try {
-                const response = await axios.get('https://localhost:7287/api/Vegetable/GetAllVegetable'); // Updated to match the new API endpoint
+                const response = await axios.get('https://localhost:7001/api/Vegetable/GetAllVegetable'); // Updated to match the new API endpoint
                 if (response.data.Success) {
                     setVegetables(response.data.Data); // Use the Data property from the response
                 } else {

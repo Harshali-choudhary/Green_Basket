@@ -23,7 +23,7 @@ const Registration = () => {
         }
 
         try {
-            const response = await axios.post('https://localhost:7287/api/Users/Insert', {
+            const response = await axios.post('https://localhost:7001/api/Users/Insert', {
                 first_name: firstName,
                 last_name: lastName,
                 email: email,

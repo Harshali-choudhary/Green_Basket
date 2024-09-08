@@ -23,7 +23,7 @@ const VegetableAddForm = () => {
         };
 
         try {
-            const response = await axios.post('https://localhost:7287/api/Vegetables/Insert', vegetable);
+            const response = await axios.post('https://localhost:7001/api/Vegetables/Insert', vegetable);
 
             if (response.data.Success) {
                 setSuccess('Vegetable added successfully!');

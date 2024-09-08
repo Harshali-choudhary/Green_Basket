@@ -1,6 +1,6 @@
 // src/pages/AdminDashboard.js
 import React from 'react';
-import VegetableInsertForm from '../components/VegetableInsertForm';
+import VegetableInsertForm from '../Components/VegetableInsertForm';
 
 const AdminDashboard = () => {
     const handleVegetableSubmit = async (vegetableData) => {
