@@ -90,7 +90,7 @@ namespace green_basket.Server.Controllers
                     last_name = userDto.LastName,
                     address = userDto.Address,
                     role = userDto.Role,
-                    password = userDto.Password, // Hash password before saving
+                    password = userDto.Password, 
                     email = userDto.Email,
                     mobile_no = userDto.MobileNo
                 };
@@ -173,7 +173,7 @@ namespace green_basket.Server.Controllers
             }
             catch (Exception ex)
             {
-                // Log the exception here (you might use a logging framework like Serilog, NLog, etc.)
+                // Log the exception here 
                 return StatusCode(500, new { Success = false, Message = "Internal server error" });
             }
         }
